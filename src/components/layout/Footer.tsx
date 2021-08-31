@@ -1,14 +1,21 @@
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Box, Text, FormLabel, Switch, Heading } from "@chakra-ui/react";
+import { textState, switchState } from "state/atoms";
+import { useRecoilState } from "recoil";
 
 const Footer = () => {
+  const [text] = useRecoilState(textState);
+  const [switchValue, setSwitchValue] = useRecoilState(switchState);
+
+  console.log(switchValue);
   return (
     <Flex as="footer" width="full" align="center">
-      <Text>
-        {new Date().getFullYear()} -{" "}
-        <Link href="https://sznm.dev" isExternal>
-          sznm.dev
-        </Link>
-      </Text>
+      <Box>
+        <Heading>{text}</Heading>
+        <Switch
+          value={switchValue}
+          onChange={() => setSwitchValue(!switchValue)}
+        />
+      </Box>
     </Flex>
   );
 };
